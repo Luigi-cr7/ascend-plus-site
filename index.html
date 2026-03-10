@@ -1,90 +1,708 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+</!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
+  <title>Ascend+ | Finally understand your money.</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics - keep your existing tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXZD6Q54ZC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-ZXZD6Q54ZC');
   </script>
-  <!-- End Google Analytics -->
 
-  <!-- Open Graph for social previews -->
-  <meta property="og:title" content="Ascend+ – Take Control of Your Debt">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ascend+ | Finally understand your money.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://luigi-cr7.github.io/ascend-plus-site/">
-  <meta property="og:image" content="https://luigi-cr7.github.io/ascend-plus-site/assets/preview-image.png">
-  <meta property="og:image:alt" content="Ascend+ website preview">
-  <meta property="og:description" content="Ascend+ helps you eliminate debt using smart payoff strategies.">
+  <meta property="og:description" content="Financial education for everyone. No catches. No cost. Just knowledge.">
 
-  <!-- Twitter Card for messaging apps -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ascend+ – Take Control of Your Debt">
-  <meta name="twitter:description" content="Ascend+ helps you eliminate debt using smart payoff strategies.">
-  <meta name="twitter:image" content="https://luigi-cr7.github.io/ascend-plus-site/assets/preview-image.png">
+  <meta name="twitter:title" content="Ascend+ | Finally understand your money.">
+  <meta name="twitter:description" content="Financial education for everyone. No catches. No cost. Just knowledge.">
 
-  <!-- Favicon and icons -->
+  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
 
-  <!-- Your CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Inline font style -->
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background: #0f172a;
-      color: white;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    button {
-      padding:12px 20px;
+
+    :root {
+      --bg: #0a0f1e;
+      --bg2: #0f1729;
+      --accent: #3bce6e;
+      --accent2: #2aa857;
+      --text: #f0f4ff;
+      --muted: #8898bb;
+      --border: rgba(255,255,255,0.07);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+              radial-gradient(ellipse at 20% 20%, rgba(59,206,110,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(59,100,206,0.05) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 50%, rgba(15,23,41,0.8) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Grain texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(0px);
+    }
+
+    nav.scrolled {
+      border-bottom-color: var(--border);
+      backdrop-filter: blur(20px);
+      background: rgba(10,15,30,0.8);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,206,110,0.1);
+      border: 1px solid rgba(59,206,110,0.2);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 800px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.4s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.8s forwards;
+    }
+
+    .waitlist-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(10px);
+    }
+
+    .waitlist-form input {
+      flex: 1;
+      padding: 14px 20px;
+      background: transparent;
       border: none;
-      background: #22c55e;
-      color:white;
-      font-size: 16px;
+      outline: none;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .waitlist-form input::placeholder {
+      color: var(--muted);
+    }
+
+    .waitlist-form button {
+      padding: 14px 24px;
+      background: var(--accent);
+      border: none;
+      color: #0a0f1e;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .waitlist-form button:hover {
+      background: var(--accent2);
+    }
+
+    .success-msg {
+      display: none;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Divider line */
+    .divider {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* Features */
+    .features {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .features-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(59,206,110,0.2);
+      transform: translateY(-4px);
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:nth-child(4) { animation-delay: 0.4s; }
+    .feature-card:nth-child(5) { animation-delay: 0.5s; }
+    .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* Truth section */
+    .truth {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .truth-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .truth-quote em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .truth-body {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Stats */
+    .stats {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .stat-item {
+      background: var(--bg2);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 60px 24px 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scrolling ticker */
+    .ticker-wrap {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+
+    .ticker {
+      display: flex;
+      gap: 48px;
+      width: max-content;
+      animation: ticker 25s linear infinite;
+    }
+
+    .ticker-item {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ticker-item::after {
+      content: '✦';
+      color: var(--accent);
+      font-size: 0.6rem;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      .waitlist-form {
+        flex-direction: column;
+        border-radius: 12px;
+      }
+
+      .waitlist-form input {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .waitlist-form button {
+        border-radius: 0 0 11px 11px;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
     }
   </style>
-  </head>
-
+</head>
 <body>
 
-<header>
-  <h1>Ascend+</h1>
-</header>
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">Ascend<span>+</span></div>
+  <div class="nav-badge">Coming Soon</div>
+</nav>
 
-<section>
-  <h2>Take Control of Your Debt</h2>
-  <p>
-    Ascend+ helps you eliminate debt using smart payoff strategies
-    like Snowball and Avalanche.
+<!-- Hero -->
+<section class="hero">
+  <p class="hero-eyebrow">Financial education for everyone</p>
+  <h1 class="hero-title">Finally <em>understand</em><br>your money.</h1>
+  <p class="hero-subtitle">
+    Most people were never taught how money actually works.
+    No catches. No cost. Just knowledge — built for everyone,
+    regardless of where you're starting from.
   </p>
 
-  <button onclick="window.location.href='https://github.com/Luigi-cr7'">
-    View GitHub
-  </button>
-
-  <p>🚧 Currently in Development</p>
+  <div class="hero-cta">
+    <form class="waitlist-form" id="waitlistForm"
+          action="https://formspree.io/f/mwvrleol"
+          method="POST"
+          onsubmit="handleSubmit(event)">
+      <input
+              type="email"
+              id="emailInput"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+      />
+      <button type="submit">Notify Me</button>
+    </form>
+    <p class="success-msg" id="successMsg">
+      ✓ You're on the list! We'll be in touch.
+    </p>
+    <p class="hero-note">Be the first to know when Ascend+ launches.</p>
+  </div>
 </section>
 
-<!-- Your JS -->
-<script src="js/app.js"></script>
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Budget Tracking</span>
+    <span class="ticker-item">Debt Payoff Strategy</span>
+    <span class="ticker-item">Compound Interest</span>
+    <span class="ticker-item">Investment Projections</span>
+    <span class="ticker-item">Credit Building</span>
+    <span class="ticker-item">HYSA & CDs</span>
+    <span class="ticker-item">Index Funds</span>
+    <span class="ticker-item">Personalized Insights</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Budget Tracking</span>
+    <span class="ticker-item">Debt Payoff Strategy</span>
+    <span class="ticker-item">Compound Interest</span>
+    <span class="ticker-item">Investment Projections</span>
+    <span class="ticker-item">Credit Building</span>
+    <span class="ticker-item">HYSA & CDs</span>
+    <span class="ticker-item">Index Funds</span>
+    <span class="ticker-item">Personalized Insights</span>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="features">
+  <p class="features-label">What Ascend+ covers</p>
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <h3 class="feature-title">Budget & Spending</h3>
+      <p class="feature-desc">See exactly where your money goes and what small changes can actually do over time.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📉</span>
+      <h3 class="feature-title">Debt Strategy</h3>
+      <p class="feature-desc">Snowball or Avalanche — see your exact payoff date and how much interest you save.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📈</span>
+      <h3 class="feature-title">Investment Projections</h3>
+      <p class="feature-desc">See what your money could grow into with compound interest working for you over time.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🏦</span>
+      <h3 class="feature-title">HYSA & Savings</h3>
+      <p class="feature-desc">Learn why your money sitting in checking is losing value — and where to move it instead.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">💳</span>
+      <h3 class="feature-title">Credit Building</h3>
+      <p class="feature-desc">Whether starting from zero or rebuilding — a clear path forward with no shame, no judgment.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🧭</span>
+      <h3 class="feature-title">Personalized Guidance</h3>
+      <p class="feature-desc">Advice that meets you where you are — based on your life stage and your situation.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Truth section -->
+<section class="truth">
+  <h2 class="truth-quote">
+    "Nobody taught me this.<br>
+    I built Ascend+ so you<br>
+    <em>don't have to figure it<br>out alone.</em>"
+  </h2>
+  <p class="truth-body">
+    This app was built from experience.
+    From the moments nobody prepares you for.
+    The knowledge inside changes lives. And it belongs to everyone.
+    Not just people who were lucky enough to be taught it.
+  </p>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">7–10%</div>
+      <div class="stat-label">avg. U.S. stock market<br>return over 100 years</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$1</div>
+      <div class="stat-label">minimum needed to start<br>investing today</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$0</div>
+      <div class="stat-label">cost to use Ascend+<br>knowledge should be free</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100+</div>
+      <div class="stat-label">years of market data<br>analyzed for you</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Ascend<span>+</span></div>
+  <p class="footer-tagline">Finally understand your money.</p>
+  <p class="footer-copyright">
+    © 2026 Ascend+ by Luis &nbsp;·&nbsp;
+    All rights reserved &nbsp;·&nbsp;
+    Financial education tool — not financial advice
+  </p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Waitlist form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('waitlistForm');
+    const email = document.getElementById('emailInput').value;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        alert('Oops! Something went wrong. Please try again.');
+      }
+    }).catch(() => {
+      alert('Oops! Something went wrong. Please try again.');
+    });
+  }
+</script>
 
 </body>
 </html>
