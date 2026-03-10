@@ -1,4 +1,4 @@
-</!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -695,6 +695,13 @@
       if (response.ok) {
         form.style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
+
+        // Track signup in Google Analytics
+        gtag('event', 'waitlist_signup', {
+          'event_category': 'engagement',
+          'event_label': 'Waitlist Form',
+          'value': 1
+        });
       } else {
         alert('Oops! Something went wrong. Please try again.');
       }
